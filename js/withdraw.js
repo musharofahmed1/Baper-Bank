@@ -9,19 +9,33 @@ document.getElementById('btn-withdraw').addEventListener('click',function(){
     const withdrawTotalElement = document.getElementById('withdraw-total');
     const previousWithdrawTotalString = withdrawTotalElement.innerText;
     const previousWithdrawTotal = parseFloat(previousWithdrawTotalString);
-    //step 4 calculate current withdraw amount
-    const currentWithdrawTotal = previousWithdrawTotal + newWithdrawAmount;
-    withdrawTotalElement.innerText = currentWithdrawTotal;
+
+    //clear field
+    withdrawField.value = '';
+   
+    //input validity check
+    if(isNaN(newWithdrawAmount)){
+        alert('Please Provide A Valid Number');
+        return;
+    }
 
     //get previous balance total 
     const balanceTotalElement = document.getElementById('balance-total');
     const previousBalanceTotalString = balanceTotalElement.innerText;
     const previousBalanceTotal = parseFloat(previousBalanceTotalString);
 
+    
+
+    //alert
+    if(newWithdrawAmount > previousBalanceTotal){
+        alert('You Have No Enough Money');
+        return;
+    }
+    //step 4 calculate current withdraw amount
+    const currentWithdrawTotal = previousWithdrawTotal + newWithdrawAmount;
+    withdrawTotalElement.innerText = currentWithdrawTotal;
     //calulate new balance total
     const newBalanceTotal = previousBalanceTotal - newWithdrawAmount;
     balanceTotalElement.innerText = newBalanceTotal;
-    //clear field
-    withdrawField.value = '';
-
+    
 })
